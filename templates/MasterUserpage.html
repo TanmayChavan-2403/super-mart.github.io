@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/MasterUserpage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;400&family=Pacifico&family=Poppins:wght@100;500&family=Varela+Round&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+
+    <title> Master User Page </title>
+</head>
+<body>
+    <div id="userpage">
+        <div id="account-pannel">
+            <div id="avatar">
+                <img src="../static/Images/account/hackytech.jpg" alt="">
+            </div>
+            <div id="user-info">
+                <li>
+                    <div class="icon">
+                        <img src="../static/Images/userpage/username.png" alt="Username">
+                    </div>
+                    <div class="info">
+                        <p>Fumino_Furuhashi</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <img src="../static/Images/userpage/email.png" alt="Email">
+                    </div>
+                    <div class="info">
+                        Email-id
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <img src="../static/Images/userpage/balance.png" alt="Accbalance">
+                    </div>
+                    <div class="info">
+                        Account balance
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <img src="../static/Images/userpage/items.gif" alt="items">
+                    </div>
+                    <div class="info">
+                        Total items 
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <img src="../static/Images/userpage/record.png" alt="record">
+                    </div>
+                    <div class="info">
+                        Sales last week
+                    </div>
+                </li>
+
+            </div>
+        </div>
+        <div id="action-pannel">
+            <div id="heading">
+                <h1>Action Pannel</h1>
+            </div>
+            <div id="action-list">
+                <div class="list">
+                    <div class="list-heading">
+                        <h2> Add new product </h2>
+                        <div class="list-heading-icon"  onclick="toggleList(0, 1000)" data-state='0deg'>
+                            <img src="../static/Images/userpage/arrow.png" alt="arrow">
+                        </div>
+                    </div>
+                    <div class="list-content">
+                        <div id="path" class="lc"></div>
+                        <div id="category" class="lc" data-status = "NOT-DONE">
+                            <button onclick="addPath('cat', 'Stationery')">Stationery</button>
+                            <button onclick="addPath('cat', 'Electronics')">Electronics</button>
+                            <button onclick="addPath('cat', 'Clothes')">Clothes</button>
+                            <button onclick="addPath('cat', 'Sports')">Sports</button>
+                            <button onclick="addPath('cat', 'Toys')">Toys</button>
+                            <button onclick="addPath('cat', 'Books')">Books</button>
+                        </div>
+                        <div id="type" class="lc" data-status = "NOT-DONE">
+                            <input type="text" placeholder="Mention Product Type..." >
+                            <button id="add1" class="add" onclick="addPath('typ')">Add </button>
+                        </div>
+                        <div id="company" class="lc" data-status = "NOT-DONE">
+                            <input type="text" placeholder="Mention Product company..." >
+                            <button id="add2" class="add" onclick="addPath('cmp')">Add </button>
+                        </div>
+                        <div id="upload">
+                            <div id="upload-buttons">
+                                <input type="file" id="inputFileButton" hidden>
+                                <button id="chooseFileButton" onclick="updateButtons()">Choose File</button>
+                                <button id='cancelButton' onclick="removeImage()"> Remove File </button>
+                                <button id='uploadButton' onclick='upload()'> Upload </button>
+                            </div>
+                            <div id="upload-preview">
+                                <img src="../static/Images/userpage/upload.png" alt="" id="imagePreview">
+                                <!-- <img src="../static/Images/userpage/upload.png" alt=""> -->
+                                <!-- <h3> Nothing uploaded, yet! </h3> -->
+                            </div>
+                        </div>
+                        <div id="file-details">
+                            <h2> Enter File Details :-  </h2>
+                            <div class="file-input">
+                                <label for="file-name"> File Name:- </label>
+                                <input type="text" id='file-name' placeholder="Enter name of file">
+                            </div>
+
+                            <div class="file-input">
+                                <label for="file-path"> File Path:- </label>
+                                <input type="text" id = 'file-path' placeholder="Path will be updated automatically" disabled>
+                            </div>
+
+                            <div class="file-input">
+                                <label for="price"> Price:- </label>
+                                <input type="text" id = "price" placeholder="Enter price of product">                            </div>
+
+                            <div class="file-input">
+                                <label for="total-images"> Total Images:- </label>
+                                <input type="text" id = "total-images"  placeholder="Enter total number inserted for files">
+                            </div>
+
+                            <div class="file-input">
+                                <label for="Total number of products"> Total number of products:- </label>
+                                <input type="text" id="total-products" placeholder="Enter total number of prodcuts">
+                            </div>
+
+                            <div id="file-info-submit">
+                                <button onclick="uploadFileData()"> Upload Data </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="list">
+                    <div class="list-heading">
+                        <h2> Not added any functionality </h2>
+                        <div class="list-heading-icon" >
+                            <img src="../static/Images/userpage/arrow.png" alt="arrow">
+                        </div>
+                    </div>
+                    <div class="list-content">
+                                                                       
+                    </div>
+                </div>
+
+                <div class="list">
+                    <div class="list-heading">
+                        <h2> Not added any functionality </h2>
+                        <div class="list-heading-icon">
+                            <img src="../static/Images/userpage/arrow.png" alt="arrow">
+                        </div>
+                    </div>
+                    <div class="list-content"></div>
+                </div>
+
+                <div class="list">
+                    <div class="list-heading">
+                        <h2> Not added any functionality </h2>
+                        <div class="list-heading-icon">
+                            <img src="../static/Images/userpage/arrow.png" alt="arrow">
+                        </div>
+                    </div>
+                    <div class="list-content"></div>
+                </div>
+
+                <div class="list">
+                    <div class="list-heading">
+                        <h2> Not added any functionality </h2>
+                        <div class="list-heading-icon">
+                            <img src="../static/Images/userpage/arrow.png" alt="arrow">
+                        </div>
+                    </div>
+                    <div class="list-content"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>  
+
+    <div id="status">
+        <h2 id="statusMessage"></h2>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script>
+        //Global declarations
+        let path = "";
+        let pathContainer = document.getElementById('path');
+        let catContainer = document.getElementById('category');
+        let typContainer = document.getElementById('type');
+        let cmpContainer = document.getElementById('company');
+        let uploadButton = document.getElementById('uploadButton');
+        let filePath = document.getElementById('file-path');
+        let cancelButton = document.getElementById('cancelButton');
+        let statusContainer = document.getElementById('status');
+
+        // Function to toggle list when clicked on arrow
+        function toggleList(id, height){
+            let arrow = document.getElementsByClassName('list-heading-icon')[id];
+            let list = document.getElementsByClassName('list')[id];
+            console.log(arrow.getAttribute('data-state'));
+            if (arrow.getAttribute('data-state') === '0deg'){
+                list.style.height = `${height}px`;
+                arrow.style.transform = 'rotateZ(180deg)';
+                arrow.setAttribute('data-state', '180deg');
+            } else {
+                list.style.height = '60px';
+                arrow.style.transform = 'rotateZ(0deg)';
+                arrow.setAttribute('data-state', '0deg');
+            }
+            
+        }
+
+        // Function to trigger input click when click on choose file button
+        // and to display preview
+        let inputFileButton = document.getElementById('inputFileButton')
+        document.getElementById('chooseFileButton').addEventListener('click', () =>{
+            inputFileButton.click();
+        });
+
+        inputFileButton.addEventListener('change', function(){
+            let file = this.files[0];
+            let img = document.getElementById('imagePreview');
+            if (file){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    const resFile = reader.result;
+                    img.src = resFile;
+                }
+                reader.readAsDataURL(file);
+            }
+            document.getElementById('cancelButton').addEventListener('click', () => {
+                
+            });
+        });
+
+
+        // function to check if their exists an image already in path which we declared
+        // If yes then remove it again because we are altering path
+        function updatePath(){
+            var file = document.getElementById('inputFileButton').files[0];
+            path = path.replace(file.name, "");
+            console.log(path, 'from updatePath', file.name);
+        }
+
+        // Function to update upload and cancel button when we click on chooseFile button
+        function updateButtons(){
+            cancelButton.style.pointerEvents = 'visible';
+            if (cmpContainer.getAttribute('data-status') === 'DONE'){
+                uploadButton.style.pointerEvents = 'visible';
+                if (path.includes('.jpg') || path.includes('.png')){
+                    updatePath();
+                }
+            }
+        }
+        
+        // Function to remove image from preview and update pointer events of 
+        // upload Button ( As we won't be having anything to upload) and cancel button ( As 
+        // we won't be having anything to cancel )
+        function removeImage(){
+            let cancelButton = document.getElementById('cancelButton');
+            let imgPreview   = document.getElementById('imagePreview');
+            cancelButton.style.pointerEvents = 'none';
+            imgPreview.src = "../static/Images/userpage/upload.png";
+
+            // To disable upload button again as we removed the current image
+            uploadButton.style.pointerEvents = 'none';
+            
+            // To update the path as we removed the current Image
+            updatePath();
+            filePath.value = "";
+            
+        }
+
+
+        // Funtion to built path
+        function addPath(type, value){
+            if (type === 'cat'){
+                path += `${value}/`;
+                // Logic to check if their exists an image already in path which we declared
+                // If yes then remove it again because we are altering path
+                if (path.includes('.jpg') || path.includes('.png')){
+                    updatePath();
+                }
+                var button = document.createElement("BUTTON");
+                button.setAttribute('id', 'path1');
+                button.setAttribute('onclick',"removePath('path1')");
+                button.innerHTML = value;
+                pathContainer.appendChild(button);
+                // As we have selected one category we will disable all the categories
+                let buttons = catContainer.children;
+                
+                Array.from(buttons).forEach(btn => {
+                    btn.setAttribute("disabled", true);
+                });
+                catContainer.setAttribute("data-status", "DONE");
+
+            } else if(type === 'typ'){
+                var inpVal = typContainer.children[0].value;
+                if (catContainer.getAttribute('data-status') === 'NOT-DONE'){
+                    alert('Please select Category tag first');
+                } else if(typContainer.getAttribute("data-status") === 'DONE') {
+                    alert('You are already done with this field, Please proceed further');
+                } else if(inpVal === ""){
+                    alert('Please type something to add');
+                } else {
+                    path += `${inpVal}/`;
+                    typContainer.setAttribute("data-status", 'DONE');
+
+                    // Logic to check if their exists an image already in path which we declared
+                    // If yes then remove it again because we are altering path
+                    if (path.includes('.jpg') || path.includes('.png')){
+                        updatePath();
+                    }
+                    
+                    // Appending button in path
+                    var button = document.createElement("BUTTON");
+                    button.setAttribute('id', 'path2');
+                    button.setAttribute('onclick',"removePath('path2')");
+                    button.innerHTML = inpVal;
+                    pathContainer.appendChild(button);
+                }
+            
+            } else {
+                var inpVal = cmpContainer.children[0].value;
+                if (catContainer.getAttribute('data-status') === 'NOT-DONE'){
+                    alert('Please select Category tag first');
+                } else if(typContainer.getAttribute("data-status") === 'NOT-DONE') {
+                    alert('Please select Type first');
+                } else if(cmpContainer.getAttribute("data-status") === 'DONE') {
+                    alert('You are done with all the steps, you can proceed further with uploding files');
+                } else if(inpVal === ""){
+                    alert('Please type something to add');
+                }else {
+                    path += `${inpVal}/`;
+                    cmpContainer.setAttribute("data-status", 'DONE');
+                    // To check if file is choosed, if yes then activate upload button, else don't
+                    if (document.getElementById('inputFileButton').files[0]){
+                        uploadButton.style.pointerEvents = 'visible';
+                    }
+                    
+                    // Logic to check if their exists an image already in path which we declared
+                    // If yes then remove it again because we are altering path
+                    if (path.includes('.jpg') || path.includes('.png')){
+                        updatePath();
+                    }
+
+                    // Appending button in path
+                    var button = document.createElement("BUTTON");
+                    button.setAttribute('id', 'path3');
+                    button.setAttribute('onclick',"removePath('path3')");
+                    button.innerHTML = inpVal;
+                    pathContainer.appendChild(button);
+                }
+            }
+
+        }
+
+        // Function to remove tag from path on click
+        function removePath(value){
+            let path1 = document.getElementById('path1');
+            let path2 = document.getElementById('path2');
+            let path3 = document.getElementById('path3');
+            if (value === 'path1'){
+                if(path2 === null && path3 === null){
+                    path = path.replace(path1.innerHTML + '/', '');
+                    path1.remove();
+                    let buttons = catContainer.children;
+                    Array.from(buttons).forEach(btn => {
+                        btn.removeAttribute('disabled');
+                    });
+                    catContainer.setAttribute("data-status", "NOT-DONE");
+                } else {
+                    alert('Please start removing tags from backward');
+                }
+            } else if (value === 'path2'){
+                if (path3 === null){
+                    path = path.replace(path2.innerHTML + '/', '');
+                    path2.remove()
+                    typContainer.setAttribute('data-status', 'NOT-DONE');
+                } else {
+                    alert('Please remove last tag first');
+                }
+            } else {
+                path = path.replace(path3.innerHTML + '/', '');
+                path3.remove();
+                cmpContainer.setAttribute('data-status', 'NOT-DONE');
+                filePath.value = ""
+                uploadButton.style.pointerEvents = 'none';
+            }
+        }
+
+
+        // Function to display status on any specific operation
+        function displayStatus(status, message){
+            statusContainer.style.transform = 'translateY(0%)';
+            console.log('Displaying ', message);
+            if (status === '500'){
+                statusContainer.style.background = '#F44336';
+                statusContainer.style.border = '1px solid red';
+                statusContainer.children[0].innerHTML = message;
+            } else {
+                statusContainer.style.background = '#5cb85c';
+                statusContainer.style.border = '1px solid black';
+                statusContainer.children[0].innerHTML = message;
+
+            }
+            setTimeout(() => {
+                statusContainer.style.transform = 'translateY(-120%)';
+            }, 5000)
+            
+        }
+
+    </script>
+    <script src="../scripts/firestoreConfig.js"></script>
+    <script src="../scripts/firestore.js"></script>
+
+</body>
+</html>
+
+
+
+<!-- Left pannel -->
+<!--
+1) Username
+2) Email
+3) Account Balance
+4) Total items in SHOP
+5) Total Sale last week -->
+
+<!-- Right pannel  -->
+<!--
+1) Add new product
+    -> upload file
+    -> upload file details
+        -> File name   
+        -> File path
+        -> Price
+        -> Total Images
+        -> Total number of product
+
+2) Refund money
+3) Remove product
+4) Transaction history
+
+-->
+
+

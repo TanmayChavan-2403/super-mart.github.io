@@ -1,0 +1,414 @@
+/* font-family: 'Josefin Sans', sans-serif;
+font-family: 'Pacifico', cursive;
+font-family: 'Poppins', sans-serif;
+font-family: 'Varela Round', sans-serif; */
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#userpage{
+    display: inline-flex;
+    width: 100%;
+    height: 99.9vh;
+}
+
+li{
+    list-style: none;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* Account pannel start */
+
+#account-pannel{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+    flex-wrap: wrap;
+}
+
+#avatar{
+    width: 70%;
+    height: 40%;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+
+#avatar img{
+    object-fit: cover;
+}
+
+
+#user-info{
+    width: 80%;
+    height: 60%;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    text-overflow: ellipsis;
+    font-size: 20px;
+    font-family: 'Varela Round', sans-serif;
+}
+
+#user-info li{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    cursor: pointer;
+    border: 1px solid rgb(150, 145, 145);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: .5s;
+}
+
+#user-info li:hover{
+    transform: scale(1.1);
+}
+
+.icon{
+    width: 25%;
+    height: 100%;
+}
+
+.icon img{
+    object-fit: cover;
+}
+
+.info{
+    padding-left: 10px;
+    width: 75%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.info p{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Account pannel end */
+
+
+
+
+
+
+
+
+
+
+
+
+/* Action pannel start  */
+
+#action-pannel{
+    border-left: 1px solid black;
+    width: 75%;
+    height: 100%;
+    
+}
+
+#heading{
+    width: 100%;
+    height: 15%;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+    padding: 0px 0px 0px 15px;
+    font-family: 'Josefin Sans', sans-serif;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#action-list{
+    width: 100%;
+    height: 85%;
+    padding: 25px;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.list{
+    border-radius: 5px;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    transition: .5s ease-in;
+    margin-top: 30px;
+}
+
+.list-heading{
+    width: 100%;
+    height: 60px;
+    /* border: 1px solid green; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 0px 0px 20px;
+    background: whitesmoke;
+
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+}
+
+.list-heading-icon{
+    width: 60px;
+    height: 100%;
+    padding: 15px;
+    cursor: pointer;
+    transition: .7s;
+    /* background: rgb(255, 246, 230); */
+}
+
+
+.list-content{
+    /* border: 1px solid yellow; */
+    width: 100%;
+    height: fit-content;
+    /* Include padding in js */
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.lc{
+    border: 1px solid rgb(150, 145, 145);
+    width: 100%;
+    min-height: 50px;
+    margin-top: 10px;
+    padding: 5px 10px 10px 10px;
+}
+
+.lc button{
+    padding: 5px 10px 5px 10px;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    border: none;
+    margin: 10px 5px 0px 0px;
+    cursor: pointer;
+    font-family: 'Varela Round', sans-serif;
+    transition: .5s;
+    background:rgb(226, 226, 226) ;
+
+}
+
+.lc button:hover{
+    background: rgb(212, 212, 212);
+}
+
+.lc input{
+    opacity: .7;
+    width: 80%;
+    height: 80%;
+    border: none;
+    font-size: 25px;
+    outline: none;
+    margin-top: 6px;
+    padding: 5px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
+.add{
+    float: right;
+    font-size: 20px;
+}
+
+#category{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#upload{
+    width: 100%;
+    margin-top: 10px;
+    height: 300px;
+    padding: 20px;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+#upload-buttons{
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#uploadButton{
+    pointer-events: none;
+}
+
+#upload-buttons button{
+    width: 60%;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 50px;
+    border: none;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .3s;
+    background:rgb(226, 226, 226) ;
+}
+
+#upload-buttons button:hover{
+    background: rgb(192, 192, 192);
+}
+
+#upload-preview{
+    width: 45%;
+    height: 100%;
+    position: relative;
+    border: 1px dashed black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(197, 119, 250);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#imagePreview{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#cancelButton{
+    pointer-events: none;
+} 
+
+
+/* Action pannel end  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* File information container start  */
+
+
+#file-details{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 25px;
+    font-family: 'Josefin Sans', sans-serif;
+    background: whitesmoke;
+}
+
+.file-input{
+    width: 100%;
+}
+
+.file-input input{
+    width: 75%;
+    float: right;
+    font-size: 15px;
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 5px;
+    outline: none;
+}
+
+#file-info-submit{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#file-info-submit button{
+    padding: 5px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    cursor: pointer;
+    border: none;
+    background: rgb(202, 202, 202);
+}
+
+/* File information container end  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Status container starts */
+
+#status{
+    width: 20%;
+    height: 10vh;
+    border: 1px solid black;
+    background: #F44336;
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    transition: .5s;
+    font-family: 'Josefin Sans', sans-serif;
+    transform: translateY(-120%);
+}
+
+
+/*Status container ends */
+

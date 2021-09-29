@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;400&family=Pacifico&family=Poppins:wght@100;500&family=Varela+Round&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;400&family=Rubik:wght@300;500&family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="../static/css/Explore.css">`
+    <script src="../scripts/userDetails.js"></script>
+
+    <title> Explore </title>
+</head>
+<body>
+    
+    <div id="navigation-pannel">
+        <div id="back-button" onclick="navigate()">
+            <img src="../static/Images/explore/backArrow.png" alt="">
+        </div>
+        <div id="navigation-menu">
+            <a href="../index.html">
+                <div id="home-button" class="nvg-buttons">
+                    <h2>HOME</h2>
+                </div>
+            </a>
+            <a href="Explore.html">
+                <div id="category-button" class="nvg-buttons">
+                    <h2>CATEGORY</h2>
+                </div>
+            </a>
+            <a href="">
+                <div id="contact-button" class="nvg-buttons">
+                    <h2>CONTACT</h2>
+                </div>
+            </a>
+            <a href="javascript:void(0)">
+                <div id="account-button" class="nvg-buttons">
+                    <h2>ACCOUNT</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div id="right-pannel">
+        <div id="category-heading">
+            <h1 data-text='Categories...'> Categories...</h1>
+        </div>
+        <div id="category-pannel">
+            <div id="categories">
+                <div class="wrapper">
+                    <div class="category-cards" onclick="changeLayer(0, 'Stationery')">
+                        <img src="../static/Images/explore/Stationery.jpg" alt="">
+                        <div class="cards-heading">
+                            <h2>STATIONERY</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="category-cards" onclick="changeLayer(1, 'Electronics')">
+                        <img src="../static/Images/explore/Electornics.jpg" alt="">
+                        <div class="cards-heading">
+                            <h2>ELECTRONICS</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wrapper">
+                    <div class="category-cards" onclick="changeLayer(2, 'Clothes')">
+                        <img src="../static/Images/explore/clothes.jpg" alt="">
+                        <div class="cards-heading">
+                            <h2>CLOTHES</h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="wrapper">
+                    <div class="category-cards" onclick="changeLayer(3, 'Sports')">
+                        <img src="../static/Images/explore/sports.png" alt="">
+                        <div class="cards-heading">
+                            <h2>SPORTS</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wrapper">
+                    <div class="category-cards" onclick="changeLayer(4, 'Toys')">
+                        <img src="../static/Images/explore/Toys.jpg" alt="">
+                        <div class="cards-heading">
+                            <h2>TOYS</h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="wrapper">
+                    <div class="category-cards" onclick="changeLayer(5, 'Books')">
+                        <img src="../static/Images/explore/Books.jpg" alt="">
+                        <div class="cards-heading">
+                            <h2>BOOKS</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="loader">
+            <h1 id="glitch">
+                Loading Data...
+                <span>Loading Data...</span>
+                <span>Loading Data...</span>
+            </h1>
+        </div>
+        <!-- Will be updated dynamically in items-pannel-->
+        <div id="items-pannel" onload="removeLoader()"></div>
+    </div>
+    <div id="purchaseBase-container">
+        <div id="purchase-container">
+            <div id="purchaseImage-container">
+                <img src="" alt="Error to update Pincode">
+            </div>
+            <div id="purchaseMessage-container">
+                <div id="purchaseMessageTitle-container">
+                    <h2> 
+                        <!-- Will be updated dynamically -->
+                    </h2>
+                    <img src="../static/Images/purchase/close.png" onclick="closePurchaseContainer()">
+                </div>
+                <h4>
+                    <!-- Will be update dynamically -->
+                </h4>
+            </div>
+        </div>
+        <div id="purchaseInfoBox">
+            <div id="InfoImgContainer">
+                <img src="../static/Images/purchase/Info.png" alt="Info container image">
+            </div>
+            <div id="InfoMessage-container">
+                <div id="InfoMessage">
+                    <h4>
+                        <!-- If you are planning to book the product, then please read this message carefully. Inorder to book any product
+                        you have to pay 20% of the product price to reserve that item for you. It will be in our shop for one month from the
+                        date of booking, so you can come in shop, show receipt, pay remaining amount and take your product.
+                        In case if you fail to purchase your booked product, then from the 20% payment only 10% will be refunded considering 
+                        someone else might have purchased that product and he couldn't because you booked. Please take your decision and 
+                        choose below option appriopriately that, do you wish to proceed further or not. -->
+                    </h4>
+                </div>
+                <div id="InfoActionButtons">
+                    <button > Yes </button>
+                    <button > No </button>
+                </div>
+            </div>
+        </div>         
+    </div>
+
+    <script>
+        // GLobal declaration
+        let navigationContainer = document.getElementById('navigation-pannel');
+        let categoryPannel = document.getElementById('category-pannel');
+        let categoryCards = document.querySelectorAll('.category-cards');
+        let loader = document.getElementById('loader');
+        let itemsPanel = document.getElementById('items-pannel');
+        let categoryHeading = document.getElementById('category-heading');
+        let navigationMenu = document.getElementById('navigation-menu');
+
+        let navPath = ['index.html'];
+        console.log(navPath);
+
+
+
+
+
+        // Function to user intersetion observer on cards
+        let cards = document.querySelectorAll('.category-cards');
+        let options = {
+            root: null,
+            threshold: 0.7,
+            rootMargin: "50px"
+        }
+
+        let observer = new IntersectionObserver(function(entries, observer){
+            entries.forEach(entry => {
+                entry.target.style.opacity = entry.isIntersecting ? '1' : '0';
+            });
+        }, options)
+        
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+
+
+
+
+        // This function is executed when this page is loaded to update some elements and details
+        window.onload = () => {
+            if (sessionStorage.getItem('User') === null){
+                // navigationMenu.children[3].href = 'javascript:void(0)';
+                navigationMenu.children[3].style.cursor = 'not-allowed';
+            } else if (sessionStorage.getItem("User") === "Hackytech") {
+                console.log(navigationMenu.children[3].children[0]);
+                navigationMenu.children[3].href = 'MasterUserpage.html';
+            } else {
+                navigationMenu.children[3].href = 'publicUserpage.html';
+            }
+        }
+        
+        // Changing layer to show the products in items pannel
+        function changeLayer(idx, collection){
+            navPath.push(idx);
+
+            //Changing heading for page
+            categoryHeading.children[0].innerHTML = "Products...";
+            categoryHeading.children[0].setAttribute('data-text', 'Products...');
+
+            // Scaling down the category card 
+            var card = categoryCards[idx];
+            card.style.filter = 'none';
+            card.style.transform = 'scale(0, 1)';
+
+            // Fading out pannel on which categories are displayed
+            categoryPannel.style.transitionDelay = '.5s';
+            categoryPannel.style.opacity = '0';
+            
+            setTimeout(() => {
+                fetchDataFromDatabase(collection, (resp) => {
+                    // After fecthing data from database, we hide the category pannel 
+                    categoryPannel.style.display = 'none';
+
+                    console.log('Products returned from database => ');
+                    console.log(resp);
+                    imgURLS = []
+                    let colors  = ['#0199d3', '#e11c25', '#d62750', '#fc9411', '#005499', '#18a6b0', '#66c8cb', '#8ccc03', '#c9368e', '#3d2a83']
+                    while (itemsPanel.children.length > 0){
+                        itemsPanel.removeChild(itemsPanel.children[0]);
+                    }
+                    resp.forEach(product => {
+                        var color = colors[Math.floor(Math.random() * colors.length)]
+                        itemsPanel.insertAdjacentHTML('afterbegin', 
+                        `
+                        <div class="card">
+                            <div class="hexagon-part">
+                                <div class="productImg" data-imgPath="${product['Path']}">
+                                    <img src="" alt="">
+                                </div>
+                            </div>
+                            <div class="right-part">
+                                <div class="Rcontent">
+                                    <div class="details">
+                                        <div class="detl">
+                                            <div class="detlIcon">
+                                                <img src="../static/Images/explore/name.png" alt="">
+                                            </div>
+                                            <div class="detlInfo" style="color: ${color};">
+                                                <h3>${product['Name']}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="detl">
+                                            <div class="detlIcon">
+                                                <img src="../static/Images/explore/rupee.png" alt="">
+                                            </div>
+                                            <div class="detlInfo" style="color: ${color};">
+                                                <h3>$${product['Price']}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="detl">
+                                            <div class="detlIcon">
+                                                <img src="../static/Images/explore/stock.png" alt="">
+                                            </div>
+                                            <div class="detlInfo" style="color: ${color};">
+                                                <h3>${product['totalProducts']} In Stock</h3>
+                                            </div>
+                                        </div>
+                                        <div class="detl">
+                                            <div class="detlIcon">
+                                                <img src="../static/Images/explore/shop.png" alt="">
+                                            </div>
+                                            <div class="detlInfo" style="color: ${color};">
+                                                <h3>Royal Super Mart</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="purchaseOptions">
+                                        <button style="background-color: ${color};" onclick="purchase('${product['Path']}', '${product['Name']}', 'buy', '${product['Price']}', '${collection}' )"> Buy </button>
+                                        <br>
+                                        <button style="background-color: ${color};" onclick="purchase('${product['Path']}', '${product['Name']}', 'book', '${product['Price']}', '${collection}' )"> Book </button>
+                                    </div>
+                                </div>
+                                <div class="leftHexagonShadow"></div>
+                            </div>
+                            <div class="left-part" style="background: ${color};"></div>
+                        </div>
+                        `
+                        )
+                        imgURLS.push(product['Path']); // Storing image path so that later we can fetch it from database
+                    });
+                    
+
+                    // Getting all the productImg containers in will product image will be set
+                    let cards = document.querySelectorAll('.productImg');
+
+                    //Logic for setting images for cards which accepts collection, like for which 
+                    // collection we want data, electronics, stationery etc.
+                    if (sessionStorage.getItem(collection)) { // So if we are already having stored images we will use them
+                        let data = JSON.parse(sessionStorage.getItem(collection));
+                        cards.forEach(card => {
+                            card.children[0].src = data[card.getAttribute('data-imgPath')];
+                        })
+                        itemsPanel.style.display = 'flex';
+                    } else {
+                        console.log('Going for direct hit, data not found in cache for images');
+                        fetchImageUrls(cards, collection, () => {
+                            itemsPanel.style.display = 'flex';
+                        });
+                    }
+
+                })
+                // setTimeout(() => {
+                //     loader.style.display = 'none';
+                //     itemsPanel.style.display = 'flex';
+                // }, 2000);
+            }, 1700);
+
+        }
+
+        function removeLoader(){
+            console.log('Removing loader');
+            loader.style.display = 'none';
+        }
+
+        function purchase(path, name, type, price, collection){
+            // Enabling the status board 
+            document.getElementById('purchaseBase-container').style.display = 'flex';
+            
+            const productURL = JSON.parse(sessionStorage.getItem(collection))[path];
+            if (sessionStorage.getItem('User') === null){
+                document.getElementById('purchase-container').style.display = 'flex';
+                updateDetails("../static/Images/purchase/login message.gif", "Not LoggedIn", 'Please login/ register to book or buy any product');
+            }
+            else if ( type == 'book'){
+                // then show booking dialogue box instead purchase container
+                // and also set onclick event on buttons with the price
+                document.getElementById('InfoMessage').children[0].innerText = `If you are planning to book the product, then please read this message carefully. Inorder to book any product you have to pay 20% of the product price to reserve that item for you. It will be in our shop for one month from the date of booking, so you can come in shop, show receipt, pay remaining amount and take your product. In case if you fail to purchase your booked product, then from the 20% payment only 10% will be refunded considering omeone else might have purchased that product and he couldn't because you booked. Please take your decision and choose below option appriopriately that, do you wish to proceed further or not.`;
+                document.getElementById('purchaseInfoBox').style.display = 'flex';
+                document.getElementById('InfoActionButtons').children[0].setAttribute('onclick', `bookProduct('Yes', '${price}', '${path}', '${name}')`);
+                document.getElementById('InfoActionButtons').children[1].setAttribute('onclick', `bookProduct('No', '', '${path}', '${name}')`);
+            } 
+            else if (type == 'buy'){
+                document.getElementById('InfoMessage').children[0].innerText = `Please take your time and choose appropriate buttons from below. Do you want to proceed furhter for purchasing this product ? Yes or No`;
+                document.getElementById('purchaseInfoBox').style.display = 'flex';
+                document.getElementById('InfoActionButtons').children[0].setAttribute('onclick',`buyProduct('Yes', '${path}', '${name}', '${type}', '${price}', '${collection}')`);
+                document.getElementById('InfoActionButtons').children[1].setAttribute('onclick',`buyProduct('No', '${path}', '${name}', '${type}', '${price}', '${collection}')` );
+            }
+            else if (sessionStorage.getItem('PinCode') !== ""){ // checking if user have added its pincode 
+                // If user is have added his area code then we will further check for availability of service in users area usign pincode
+                if (["400068", "401074", "401104", "401105", "401107"].includes(sessionStorage.getItem('PinCode'))) {
+                    // Check if user is having balance 
+                    if ( parseInt(sessionStorage.getItem('Balance')) >= parseInt(price) ){ // If user is having balance then he can purchase else not
+                        bookOrBuyProduct(path, name, (resp) => {
+                            console.log('From booking product', resp);
+                            updateDetails("../static/Images/purchase/purchased.png", "Purchased", 'Transaction successfull, your product will arrive within 5 days, please check registerd email for more details');
+                        });
+                        
+                    } else { 
+                        updateDetails("../static/Images/purchase/balance.png", "Insufficient Balance", "You don't have sufficient balance in your wallet, please add money to your wallet and then try buying");
+                    }
+                } else {
+                    // Else we have to ask user to book that product and go to pick up that product by himself
+                    updateDetails("../static/Images/purchase/apologize.png", "Failed! Reason ", 'Sorry, currently our service is not available in your area, we are planning to expand our service and will be available in your area very soon. Would you like to book our product instead? Click on Book button for more details');
+                } 
+            } else {
+                // If user haven't added pincode then update the text heading and image
+                updateDetails('../static/Images/purchase/pincode.png', "Warning", 'You are not allowed to purchase or buy anything until and unless you add your pincode, so please go in your account settings and add your pincode.');
+            }
+        }
+
+        // Function to close the purchase container when clicked on cross mark
+        function closePurchaseContainer(){
+            document.getElementById('purchaseBase-container').style.display = 'none';
+            document.getElementById('purchase-container').style.display = 'none';
+        }
+
+        // This function is triggered when a user chooses an option between yes or no on book info page
+        function bookProduct(choice, price, imgPath, prodName){
+            if (choice ==='No'){
+                document.getElementById('purchaseInfoBox').style.display = 'none';
+                document.getElementById('purchaseBase-container').style.display = 'none';
+            } else {
+                document.getElementById('purchaseInfoBox').style.display = 'none';
+                document.getElementById('purchase-container').style.display = 'flex';
+
+                let calcTwentyPercentVal = parseInt(price) * 0.2;
+                // Checking if the calculated 20% balance is available in the wallet, If yes then,
+                if (parseInt(sessionStorage.getItem('Balance')) >= calcTwentyPercentVal){
+                    bookOrBuyProduct(imgPath, prodName, (resp) => {
+                        console.log('From booking product', resp);
+                        updateDetails('../static/Images/purchase/purchased.png', 'Booked', `Successfull!, Your product have been booked by 20% value of ${price} which is ${calcTwentyPercentVal}. Please make sure that you collect your product in one month, and please check email for receipt`);
+                    });
+                } else {
+                    updateDetails('../static/Images/purchase/balance.png', 'Insufficient Balance', `You don't have sufficient balance in your wallet, please add money to your wallet and then try booking product`);
+                }
+                
+            }
+        }
+
+        function buyProduct(choice, path, name, type, price, collection){
+            if (choice === 'No'){
+                document.getElementById('purchaseInfoBox').style.display = 'none';
+                document.getElementById('purchaseBase-container').style.display = 'none';
+            } else {
+                document.getElementById('purchaseInfoBox').style.display = 'none';
+                purchase(path, name, '', price, collection);
+                console.log('Now purchasing this product');
+            }
+        }
+
+        // A Helper function to set messages and images for purchase container.
+        function updateDetails(imgPath, heading, message){
+            document.getElementById('purchase-container').style.display = 'flex'; // Making error window visible
+            document.getElementById('purchaseImage-container').children[0].src = imgPath; // updaing the image showing cross hands as not allowed
+            document.getElementById('purchaseMessageTitle-container').children[0].innerHTML = heading; // Setting text of heading as warning 
+            document.getElementById('purchaseMessage-container').children[1].innerHTML = message;
+
+        }
+
+        // This funtion is used to store and navigate throught the explore webpage
+        function navigate(){
+            console.log(navPath);
+            if (navPath.length == 1){
+                window.location.replace(`../${navPath[0]}`);
+            } else {
+                itemsPanel.style.display = 'none';
+                categoryPannel.style.display = 'flex';
+
+                // Scaling up the category card on which we clicked while going in items pannel
+                var card = categoryCards[navPath.pop()];
+                card.style.filter = 'drop-shadow(-15px -15px 0px #75D5FD)';
+                card.style.transform = 'scale(1, 1)';
+
+                //Changing heading for page as we are going back to category page
+                categoryHeading.children[0].innerHTML = "Categories...";
+                categoryHeading.children[0].setAttribute('data-text', 'Categories...');
+
+                // Fading in pannel on which categories are displayed
+                categoryPannel.style.transitionDelay = '.5s';
+                categoryPannel.style.opacity = '1';
+
+                console.log(`Don't worry we won't be reaching here yet`, navPath);
+            }
+        }
+
+    </script>
+    <script src="../scripts/firestoreConfig.js"></script>
+    <script src="../scripts/firestore.js"></script>
+</body>
+</html>
+
+
+
+<!--  Deprecated card html code starts -->
+
+<!-- <div class="card" data-imgPath = "${product['Path']}">
+    <div class="back-info-container">
+        <div id="product-name">
+            <h2> ${product['Name']} </h2>
+        </div>
+        <div id="image-gallery">
+            <img src="../static/Images/explore/Gallery.png" alt="">
+            <h3> Image Gallery </h3>
+        </div>
+        <div id="price-container">
+             <img src="../static/Images/explore/dollar.png" alt=""> 
+            <h2> ${product['Price']}/- </h2>
+        </div>
+        <div id="stock-info-container">
+             <img src="../static/Images/explore/stock.png" alt="Stock Image"> 
+            <h2> ${product['totalProducts']}    IS </h2>
+        </div>
+        <div id="purchase-container">
+            
+            <div id="buy" class="purchase-button">
+                <h2> Buy Now </h2>
+            </div>
+            <div id="book" class="purchase-button">
+                <h2>Book</h2>
+            </div>
+        </div>
+    </div>
+    <div id="front">
+        <img src="" alt="">
+    </div>
+</div> -->
+
+<!--  Deprecated card html code ends -->

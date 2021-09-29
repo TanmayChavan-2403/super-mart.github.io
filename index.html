@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Royal Super Mart </title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="static/css/index.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Goudy+Bookletter+1911&family=Kavoon&family=Montserrat:wght@500&family=Nunito:wght@700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap" rel="stylesheet"> 
+        <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase.js"></script>
+        <script src="scripts/firestoreConfig.js"></script>
+        <script src="scripts/userDetails.js"></script>
+    </head>
+    <body>
+
+        <div class="main">
+            <div id="menu-bar">
+                <div id="backArrow" onclick="shrink()">
+                    <img src="static/Images/arrow.png">
+                </div>
+                
+                <div id="toggle-box">
+                    <div class="menu">
+                        <a href="index.html">
+                            <p> HOME </p>
+                        </a>
+                    </div>
+                    <div class="menu">
+                        <a href="templates/Explore.html">
+                            <p> CATEGORIES </p>
+                        </a>
+                    </div>
+                    <div class="menu">
+                        <a href="templates/Account.html">
+                            <p> CONTACT </p>
+                        </a>
+                    </div>
+                    <div class="menu" onclick="print()">
+                        <a href="templates/Account.html">
+                            <p> SIGN-IN / SIGN-OUT </p>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="javascript:void(0)" id="userPage">
+                    <div id="account-box">
+                        <img src="static/Images/account/userPage.png" alt="UserPage">
+                        <h2 id="username">  </h2>
+                    </div>
+                </a>
+
+            </div>
+            <div class="content">
+                <div class="content-message">
+                    <p> SIT AT HOME </p>
+                        <p>AND</p>
+                    <p>SHOP AT EASE WITH OUR WEBSITE</p>
+                    <div class="explore">
+                        <div class="text">
+                            <a href="templates/Explore.html">
+                                <p> ExPlore </p>
+                            </a>
+                        </div>
+                        <div class="arrow">
+                            <img src="static/Images/arrow.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+            <!-- <div class="LP">
+                <img src="static/Images/Landing page.png" alt="">
+            </div> -->
+        </div>
+
+        <div class="bg"></div>
+
+        
+    <script src="scripts/ButtonRippleEffect.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        // Function runs when page is loaded and checks if we have any sing-in users
+        // in session 
+        window.onload = function(){
+            if (sessionStorage.getItem("User") !== null){
+                let username = document.getElementById('username');
+                let AccountBox = document.getElementById('account-box');
+                username.innerHTML = sessionStorage.getItem('User');
+                if (sessionStorage.getItem("User") === "Hackytech"){
+                    AccountBox.children[0].src = 'static/Images/account/hackytech.jpg';
+                    // AccountBox.setAttribute('onclick' ,"getUserDetails('templates/MasterUserpage.html')");
+                    document.getElementById('userPage').href = 'templates/MasterUserpage.html';
+                    console.log(sessionStorage.getItem("User"));
+                } else{
+                    if (sessionStorage.getItem('AvatarURL')){
+                        AccountBox.children[0].src = sessionStorage.getItem('AvatarURL');
+                    } else {
+                        AccountBox.children[0].src = 'static/Images/account/userPage.png'
+                    }
+                    // AccountBox.setAttribute('onclick', "getUserDetails('templates/publicUserpage.html')");
+                    document.getElementById('userPage').href = 'templates/publicUserpage.html';
+                    
+                    console.log(sessionStorage.getItem("User"));
+                }
+            } else {
+                console.log('No users yet');
+            }
+        }
+
+        var menuButton = document.getElementById('toggle-box');
+        menuButton.addEventListener('click', function(e){
+
+            // Making userpage box visible again
+            let userPage = document.getElementById('account-box');
+            userPage.style.opacity = '1';
+            userPage.style.pointerEvents = 'visible';
+            userPage.style.transitionDelay = '1s';
+
+            // Changing width of menu bar
+            var menuBar = document.getElementById('menu-bar');
+            const menuWidth = getComputedStyle(menuBar).width;
+            // menuBar.style.width = (menuWidth == '34.15px' ? '194.65px' : '34.15px');
+            menuBar.style.width = '194.65px';
+            
+            
+            // Changin size of menus
+            menuButton.style.top = '20%';
+            menuButton.style.padding = '5px';
+            menuButton.style.height = '50%';
+            var menus = document.querySelectorAll('.menu');
+            menus.forEach(menu => {
+                menu.style.width = '100%';
+                menu.style.height = '20%';
+                menu.style.marginTop = '5px';
+                menu.style.borderRadius = '50px';
+                menu.style.background = '#161616';
+                menu.style.pointerEvents = 'all';
+                menu.children[0].style.opacity = '1';
+                menu.children[0].style.transitionDelay = '.5s';
+            });
+
+            // Make arrow visible 
+            var arrow =document.getElementById('backArrow');
+            arrow.style.display = 'block';
+            arrow.style.zIndex = '1';
+            arrow.style.opacity = '1';
+
+        });
+
+        function shrink(){
+            var menuBar = document.getElementById('menu-bar');
+            const menuWidth = getComputedStyle(menuBar).width;
+            menuBar.style.width = '34.15px';
+
+            // Repositioning menu buttons
+            var menuButton = document.getElementById('toggle-box');
+            menuButton.style.top = '0%';
+            menuButton.style.padding = '0px';
+            menuButton.style.height = '5%';
+            var menus = document.querySelectorAll('.menu');
+            menus.forEach(menu => {
+                menu.style.width = '45%';
+                menu.style.height = '45%';
+                menu.style.marginTop = '0px';
+                menu.style.background = 'white';
+                menu.style.borderRadius = '3px';
+                menu.style.pointerEvents = 'none';
+                menu.children[0].style.opacity = '0';
+                menu.children[0].style.transitionDelay = '0s';
+                menu.children[0].style.transition = '.4s';
+            });
+
+            // Make arrow invisible 
+            var arrow =document.getElementById('backArrow');
+            arrow.style.display = 'hidden';
+            arrow.style.zIndex = '1';
+            arrow.style.opacity = '0';
+
+            // Making userpage box invisible again
+            let userPage = document.getElementById('account-box');
+            userPage.style.opacity = '0';
+            userPage.style.pointerEvents = 'none';
+            userPage.style.transitionDelay = '0s';
+            userPage.style.transition = '.3s';
+
+        }
+
+        function print(){
+            console.log('Sign-in');
+        }
+
+    </script>
+
+    <script src="scripts/userDetails.js"></script>
+    </body>
+</html>

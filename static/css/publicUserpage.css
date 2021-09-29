@@ -1,0 +1,681 @@
+/* font-family: 'Josefin Sans', sans-serif;
+font-family: 'Pacifico', cursive;
+font-family: 'Poppins', sans-serif;
+font-family: 'Varela Round', sans-serif; */
+/* font-family: 'Montserrat', sans-serif; */
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+#userpage{
+    display: inline-flex;
+    width: 100%;
+    height: 99.9vh;
+    /* display: none; */
+}
+
+body{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+li{
+    list-style: none;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Account pannel start */
+
+.skleton{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.sktn{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right,  transparent,rgb(226, 226, 226), transparent );
+    transform: translateX(-100%);
+    animation: skleton 1.5s linear infinite;
+}
+
+#account-pannel{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+    flex-wrap: wrap;
+}
+
+#avatar{
+    width: 70%;
+    height: 40%;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+}
+
+#avatar img{
+    object-fit: cover;
+    background: white;
+}
+
+
+#user-info{
+    width: 80%;
+    height: 63%;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    text-overflow: ellipsis;
+    font-size: 20px;
+    font-family: 'Varela Round', sans-serif;
+}
+
+#user-info li{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    cursor: pointer;
+    border: 1px solid rgb(150, 145, 145);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: .2s;
+}
+
+#user-info li:hover{
+    transform: scale(1.1);
+}
+
+.icon{
+    width: 25%;
+    height: 100%;
+}
+
+.icon img{
+    object-fit: contain;
+}
+
+.info{
+    padding-left: 10px;
+    width: 75%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    /* text-align: center; */
+}
+
+.info p{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@keyframes skleton{
+    0%{
+        transform: translate(-100%);
+    }
+    100%{
+        transform: translate(400%);
+    }
+}
+
+/* Account pannel end */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* updationg pannel starts  */
+
+#updation-pannel{
+    width: 75%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+
+.action-list{
+    border-radius: 5px;
+    width: 100%;
+    height: 60px; 
+    overflow: hidden;
+    transition: .5s ease-in;
+    margin-top: 30px;
+}
+
+#heading{
+    width: 100%;
+    height: 15%;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    padding: 0px 0px 0px 15px;
+    font-family: 'Josefin Sans', sans-serif;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.list-heading{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 0px 0px 20px;
+    background: rgb(214, 212, 212);
+}
+
+.list-heading-icon{
+    width: 60px;
+    height: 100%;
+    padding: 15px;
+    cursor: pointer;
+    transition: .7s;
+    transform: rotateZ(0deg);
+}
+
+.list-content{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    transition: .8s;
+    padding: 25px 0px;
+}
+
+
+
+
+
+
+
+
+
+.order{
+    border: 1px solid rgb(139, 139, 139);
+    width: 85%;
+    height: 50px;
+    margin-top: 15px;
+    display: flex;
+    font-size: 1.2em;
+    position: relative;
+    overflow: hidden;
+}
+
+.order-skeleton{
+    width: 100%;
+    height: 100%;
+    background: black;
+    position: absolute;
+    animation: skeleton ease 2s infinite;
+    transform: translateX(-150%);
+    background: linear-gradient(to right,  transparent,rgb(202, 202, 202), transparent );;
+}
+
+.order-name{
+    width: 50%;
+    height: 100%;
+    position: relative;
+    transition: .2s;
+}
+
+.order-day, .order-time{
+    width: 25%;
+    height: 100%;
+}
+
+.order-name, .order-day, .order-time{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-image{
+    width: 420px;
+    height: 300px;
+    background: lightblue;
+    position: absolute;
+    bottom: 60%;
+    right: 0px;
+    transform: translateY(60%);
+    visibility: hidden;
+    transition: .2s;
+    opacity: 0;
+    z-index: 2;
+
+}
+
+.order:hover .order-image{
+    visibility: visible;
+    opacity: 1;
+}
+
+.order:hover .order-name{
+    color: rgb(8, 95, 124);
+    cursor: pointer;
+}
+
+.user-input{
+    width: 85%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    background: rgb(245, 245, 245);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    margin: 10px 0px;
+}
+
+.user-input input{
+    width: 75%;
+    float: right;
+    font-size: 15px;
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 5px;
+    outline: none;
+    border: 1px solid rgb(214, 212, 212);
+    border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+#Avatar{
+    width: 75%;
+    height: 30px;
+    float: right;
+    outline: none;
+    /*border: 1px solid rgb(214, 212, 212);*/
+    /*border-radius: 3px;*/
+    font-weight: 500;
+}
+
+#Avatar button{
+    border: 1px solid rgb(214, 212, 212);
+    width: 15%;
+    height: 100%;
+    float: right;
+    font-size: 15px;
+    font-family: 'Josefin Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(214, 212, 212);
+}
+
+.user-input button{
+    margin: 0 auto;
+    padding: 6px 15px;
+    transition: .8s;
+    border: 1px solid rgb(214, 212, 212);
+    cursor: pointer;
+    background: rgb(214, 212, 212);
+}
+
+
+/* updationg pannel ends  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Confiramtion pannel starts*/
+
+#confirmation-base{
+    width: 38%;
+    height: 55vh;
+    top: 50%;
+    left: 50%;
+    border-radius: 25px;
+    position: absolute;
+    background: #fec901;
+    padding: 15px;
+    transition: ease;
+    transform: translate(-50%, -50%) scale(.0);
+    /*transform: translate(-50%, -50%);*/
+}
+
+
+#confirmation-container{
+    width: 100%;
+    height: 100%;
+    border: 3px solid black;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+#confirmation-heading{
+    width: 100%;
+    height: 30%;
+    background: black;
+    display: flex;
+    color: #fec901;
+    font-size: 1.8em;
+    padding: 10px 15px;
+    justify-content: space-around;
+    -webkit-text-stroke:  .2em;
+}
+
+#confirmation-heading img{
+    width: 20%;
+    height: 110%;
+
+}
+
+#confirmation-message{
+    border-bottom: 3px solid black;
+    width: 100%;
+    height: 50%;
+    text-align: center;
+    padding: 10px;
+}
+
+#confirmation-options{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#confirmation-options button{
+    width: 23%;
+    height: 85%;
+    border: 1px solid black;
+    background:  black;
+    border-radius: 15px;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+
+@keyframes popup{
+    0%{
+        transform: translate(-50%, -50%) scale(.1);
+    }
+    90%{
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100%{
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes hidedown{
+    0%{
+        transform: translate(-50%, -50%) scale(1);
+    }
+    10%{
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    100%{
+        transform: translate(-50%, -50%) scale(.0);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/*Confiramtion pannel ends */
+
+
+
+
+
+
+
+
+
+/*Status container starts */
+
+#status{
+    width: 20%;
+    height: 10vh;
+    border: 1px solid black;
+    /*background: rgba(255, 0, 0, .6);*/
+    background: black;
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    color: white;
+    transition: .5s;
+    transform: translateY(-120%);
+}
+
+
+/*Status container ends */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Avatar updation pannel start */
+
+#avatarPannelPreloader{
+    width: 100%;
+    height: 100%;
+    background: #676d89;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#avatarPannelPreloader img {
+    width: auto;
+    height: auto;
+}
+
+#avatarPannelBase{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    backdrop-filter: blur(10px);
+    display: none;
+}
+
+#avatarPannel{
+    border: 3px dashed black;
+    width: 33%;
+    height: 90vh;
+    margin: 0px auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+}
+
+#avatarHeading{
+    width: 100%;
+    height: 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5px;
+    background: whitesmoke;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#avatarHeading img{
+    width: auto;
+    background: rgb(230, 230, 230);
+    cursor: pointer;
+}
+
+#avatarHeading button{
+    width: fit-content;
+    height: 75%;
+    padding: 0px 20px;
+    border: 1px solid rgb(195, 195, 195);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+#avatarsImgContainer{
+    width: 100%;
+    height: 92%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+#avatarsImgContainer input{
+    width: 45%;
+    height: 30vh;
+    margin-top: 15px;
+    cursor: pointer;
+    object-fit: contain;
+    background-position: center;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    caret-color: transparent;
+    border: none;
+}
+
+#avatarsImgContainer input:focus{
+    border: 3px solid rgb(10, 111, 206);
+    border-radius: 10px;
+    outline: none;
+    background-color: rgb(226, 226, 226);
+}
+
+#avatarsImgContainer img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/*Avatar updation pannel end */
+
+
+
+
+/*  Animations  */
+
+
+@keyframes skeleton{
+    0%{
+        transform: translateX(-90%);
+    }
+    100%{
+        transform: translateX(100%);
+    }
+}
+
+
+

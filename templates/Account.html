@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/Account.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Goudy+Bookletter+1911&family=Kavoon&family=Montserrat:wght@500&family=Nunito:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap" rel="stylesheet"> 
+    <script src="../scripts/Registration.js"></script>
+    <script src="../scripts/login.js"></script>
+    <script src="../scripts/valid.js"></script>
+    <script src="../scripts/userDetails.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase.js"></script>
+    <script src="../scripts/firestoreConfig.js"></script>
+
+    <title>Document</title>
+    
+</head>
+<body>
+    <div class="main-container">
+        <img src="../static/Images/AccountBG.png" alt="">
+        <div class="mask"></div>
+        <div class="login-registration">
+
+            <div id="page3" class="pg">
+                <div class="registration-avatar">
+                    <img src="../static/Images/account/avatar.png" alt="">
+                </div>
+                <div class="reg-input-field" id='username'>
+                    <input type="text" placeholder="Username">
+                </div>
+                <div class="reg-input-field" id='email'>
+                    <input type="text" placeholder="Email">
+                </div>
+                <div class="reg-input-field" id="password">
+                    <input type="password" placeholder="Password">
+                </div>
+                <div class="reg-buttons">
+                    <div class="prev-page" onclick="prevPage()">
+                        <img src="../static/Images/accountArrow.png" alt="">
+                    </div>
+                    <div class="reg-submit-button" onclick="regSubmit()">
+                        <h2>SUBMIT</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page2" class="pg">
+                <div class="regestrantion-image">
+                    <img src="../static/Images/account/registration.png" alt="Registration Image">
+                </div>
+                <div class="login-inputs">
+                    <div class="page2Avatar">
+                        <img src="../static/Images/account/avatar.png" alt="">
+                    </div>
+                    <div class="username login-input-field">
+                        <input type="text" placeholder="Username / Email">
+                    </div>
+                    <div class="password login-input-field">
+                        <input type="password" placeholder="Password">
+                    </div>
+                    <div class="login-subimt" >
+                        <div class="submit-button" onclick="loginSubmit()">
+                            <h2>SUBMIT</h2>
+                        </div>
+                        <div class="next-page"  onclick="nextPage()">
+                            <img src="../static/Images/accountArrow.png" alt="">
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div id="page1" class="pg">
+                <div class="p1Image">
+                    <img src="../static/Images/account/Login.png" alt="Login Image">
+                </div>
+                <div class="login-registration-button">
+                    <div class="LRB-message">
+                        Where you wanna go ?
+                    </div>
+                    <div class="LRB-btn">
+                        <h2>LOGIN</h2>
+                    </div>
+                    <div class="LRB-btn" id="LRB-reg" onclick="navigateToRegPage()">
+                        <h2>REGISTRATION</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="status-container">
+        <div id="status-frame">
+            <div id="status-gif">
+                <img src="" alt="" id="gif-container">
+            </div>
+            <div id="status-message">
+                <h1> Registration Successfull </h1>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        buttons = document.querySelectorAll('.LRB-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function(e){
+
+                let targetVal = btn.children[0].innerText;
+                if (targetVal == 'LOGIN'){
+                    // To turn page
+                    var container = document.querySelector('#page1');
+                    container.style.transform = 'perspective(1300px) rotateY(-179deg)';
+
+                    // To make login image visible again 
+                    var image = document.querySelector('.p1Image').getElementsByTagName('img');
+                    image[0].style.opacity = '1';
+                    image[0].style.transform = 'translateY(-5%)';
+
+                    // To increase size of login-registration container
+                    var container2 = document.querySelector('.login-registration');
+                    container2.style.width = '60%';
+                    let pages = document.querySelectorAll('.pg');
+                    pages.forEach(page => {
+                        if (page['id'] == 'page1'){
+                            page.style.transform = 'perspective(1300px) rotateY(-179deg) translateX(-51%)';
+                        }
+                        else{
+                            page.style.transform = 'translate(50%)';
+                        }
+                    });
+                }
+
+            });
+        });
+
+        // Function to get ripples on submit button
+        let btn = document.querySelector('.submit-button');
+        btn.addEventListener('click', function(e){
+            var x = e.layerX + 10;
+            var y = e.layerY + 5;
+
+            let ripple = document.createElement('span');
+
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            this.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove()
+            }, 600);
+
+        });
+
+        // Function to go on registration page from login page
+        function nextPage(){
+            // ACTIONS REQUIRED TO FLIP PAGE 2
+
+            let button = document.getElementById('page2');
+            button.style.transform = 'perspective(1300px) rotateY(-179deg) translateX(49%)';
+            button.style.zIndex = '2'
+            let container  =  document.querySelector('.login-inputs');
+            container.style.transformStyle = 'preserve-3d';
+
+            // To make login image invisible again 
+            var image = document.querySelector('.p1Image').getElementsByTagName('img');
+            image[0].style.opacity = '0';
+            image[0].style.transform = 'translateY(-15%)';
+            image[0].style.transitionDelay = '0s';
+
+            // To activate the pointer events on last page ( page 3)
+            let page3 = document.getElementById('page3');
+            page3.style.pointerEvents = 'auto';
+
+        };
+
+        // Function to go back to login page from registration page
+        function prevPage(){
+
+            // ACTIONS REQUIRED TO FLIP PAGE 2 in reverse direction
+
+            let button = document.getElementById('page2');
+            button.style.transform = 'rotateY(0deg) translateX(51%)';
+            button.style.zIndex = '0'
+            let container  =  document.querySelector('.login-inputs');
+            container.style.transformStyle = 'preserve-3d';
+
+            // To make login image visible again 
+            var image = document.querySelector('.p1Image').getElementsByTagName('img');
+            image[0].style.opacity = '1';
+            image[0].style.transform = 'translateY(-5%)';
+            image[0].style.transitionDelay = '.s';
+
+            // To deactivate the pointer events on last page ( page 3)
+            let page3 = document.getElementById('page3');
+            page3.style.pointerEvents = 'none';
+        }
+
+        //To submit login details
+        async function loginSubmit(){
+            console.log('Reaching here');
+
+            // TAKING INPUT DATA FROM LOGIN INPUT FIELDS
+            var username = document.querySelector('.username').children[0].value;
+            var password = document.querySelector('.password').children[0].value;
+
+            login(username, password, function (resp){
+                console.log(`In Account.html ${resp}`);
+                // Taking all the containers for showing status window
+
+                document.getElementById('status-container').style.opacity = '1';
+                document.getElementById('status-container').style.pointerEvents = 'visible';
+                let imageContainer = document.getElementById('status-gif');
+                let messageContainer = document.getElementById('status-message');
+                let frameContainer = document.getElementById('status-frame');
+                let gifContainer = document.getElementById('gif-container');
+
+                // IF we get a failed response then we have to show cross mark gif and 
+                // what went wrong or else, a check mark with login successfull message
+
+                if (resp[0] === 'Failed'){
+                    gifContainer.src = '../static/Images/account/regWrong.gif';
+                    messageContainer.children[0].innerHTML = resp[1];
+                    messageContainer.style.color = 'rgb(248, 58, 58)';
+                } else {
+                    gifContainer.src = '../static/Images/account/regCheck.gif';
+                    messageContainer.children[0].innerHTML = `Login Successfull`;
+                    messageContainer.style.color = "rgb(3, 146, 3)";
+                    setTimeout(() => {
+                        sessionStorage.setItem("User", username);
+                        getUserDetails(() => {
+                            if (resp){
+                                console.log('Master user', username);
+                                location.href = '../index.html';
+                            } else {
+                                console.log('Public user', username);
+                                location.href = '../index.html';
+                            }
+                        })                        
+                    }, 3000);
+                }
+                // Logic to disable status window automatically after 3 seconds 
+                setTimeout(() => {
+                    console.log('Reached here second');
+                    document.getElementById('status-container').style.opacity = '0';
+                    document.getElementById('status-container').style.pointerEvents = 'none';
+                }, 3000);
+
+            });
+
+            
+        }
+
+        function navigateToRegPage(){
+            var page1 = document.getElementById('page1');
+            var page3 = document.getElementById('page3');
+
+            // To turn page
+            page1.style.transform = 'perspective(1300px) rotateY(-179deg)';
+
+            // To increase size of login-registration container
+            var container2 = document.querySelector('.login-registration');
+            container2.style.width = '60%';
+            let pages = document.querySelectorAll('.pg');
+            pages.forEach(page => {
+                if (page['id'] == 'page1'){
+                    page.style.transform = 'perspective(1300px) rotateY(-179deg) translateX(-51%)';
+                }
+                else{
+                    page.style.transform = 'translate(50%)';
+                }
+            });
+
+            setTimeout(function(){
+                 // ACTIONS REQUIRED TO FLIP PAGE 2
+                let button = document.getElementById('page2');
+                button.style.transform = 'perspective(1300px) rotateY(-179deg) translateX(49%)';
+                button.style.zIndex = '2'
+                let container  =  document.querySelector('.login-inputs');
+                container.style.transformStyle = 'preserve-3d';
+
+                // To activate the pointer events on last page ( page 3)
+                let page3 = document.getElementById('page3');
+                page3.style.pointerEvents = 'auto';
+
+            }, 400)
+
+        }
+
+        function regSubmit(){
+            // TAKING INPUT DATA FROM LOGIN INPUT FIELDS
+
+            let username = document.getElementById('username').children[0].value;
+            let password = document.getElementById('password').children[0].value;
+            let email = document.getElementById('email').children[0].value;
+            // console.log('CRL => Account.html => ', username, password, email);
+
+            let resp = register(username, password, email);
+            resp.then(message =>{
+                // Taking all the containers for showing status window
+                
+                document.getElementById('status-container').style.opacity = '1';
+                document.getElementById('status-container').style.pointerEvents = 'visible';
+                let imageContainer = document.getElementById('status-gif');
+                let messageContainer = document.getElementById('status-message');
+                let frameContainer = document.getElementById('status-frame');
+                let gifContainer = document.getElementById('gif-container');
+
+                // IF we get a failed response then we have to show cross mark gif and 
+                // what went wrong or else, a check mark with login successfull message
+
+                if (!(message == undefined)){ // Means we failed
+                    gifContainer.src = '../static/Images/account/regWrong.gif';
+                    messageContainer.children[0].innerHTML = message;
+                    messageContainer.style.color = 'rgb(248, 58, 58)';
+                }else{
+                    gifContainer.src = '../static/Images/account/regCheck.gif';
+                    messageContainer.children[0].innerHTML = `Registration Successfull`;
+                    messageContainer.style.color = "rgb(3, 146, 3)";
+                   
+                    setTimeout(() => {
+                        sessionStorage.setItem("User", username);
+                        getUserDetails(() => {
+                            console.log('Public user', username);
+                            location.href = '../index.html';
+                        })                        
+                    }, 3000);
+                }
+                
+                //Logic to disable status window automatically after 3 seconds of error window
+
+                setTimeout(() => {
+                    console.log('Reached here second');
+                    // document.getElementById('status-container').style.display = 'none';
+                    document.getElementById('status-container').style.opacity = '0';
+                    document.getElementById('status-container').style.pointerEvents = 'none';
+                }, 3000);
+            });
+        }
+
+    </script>
+    
+</body>
+</html>
+

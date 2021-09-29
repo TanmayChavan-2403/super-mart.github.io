@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/publicUserpage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;400&family=Pacifico&family=Poppins:wght@100;500&family=Varela+Round&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet"> 
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+    <script src="../scripts/userDetails.js"></script>
+    
+    <title>User profile</title>
+</head>
+<body onload="setFields()">
+<!-- <body> -->
+    <div id="userpage">
+        <div id="account-pannel">
+            <div id="avatar"  >
+                <!-- <img src="../static/Images/account/hackytech.jpg" alt=""> -->
+                <img src="" alt="avatar">
+                <div class="skleton">
+                    <div class="sktn"></div>
+                </div>
+            </div>
+            <div id="user-info">
+                <li>
+                    <div class="icon">
+                        <img src="../static/Images/userpage/username.png" alt="Username">
+                    </div>
+                    <div class="info" data-type='User'>
+                        <p>Fumino_Furuhashi</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <img src="../static/Images/userpage/email.png" alt="Email">
+                    </div>
+                    <div class="info" data-type='Email'>
+                        <p> Fumino_Furuhashi </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <img src="../static/Images/userpage/balance.png" alt="Accbalance">
+                    </div>
+                    <div class="info" data-type='Balance'>
+                        <p>Fumino_Furuhashi</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <img src="../static/Images/userpage/items.gif" alt="items">
+                    </div>
+                    <div class="info" data-type='TotalPurchase'>
+                       <p> Total Item Purchas</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <img src="../static/Images/userpage/pincode.png" alt="items">
+                    </div>
+                    <div class="info" data-type='PinCode'>
+                       <p> Pin code</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <img src="../static/Images/userpage/logout.png" alt="record">
+                    </div>
+                    <div class="info" onclick="logout()">
+                       <p>Logout</p>
+                    </div>
+                </li>
+
+            </div>
+        </div>
+        <div id="updation-pannel">
+            <div id="heading">
+                <h1>User's Action Pannel</h1>
+            </div>
+            <div class="action-list">
+                
+                <div class="list-heading">
+                    <h2> Update user details </h2>
+                    <div class="list-heading-icon" onclick="toggleList(0, 500)" data-state='0deg'>
+                        <img src="../static/Images/userpage/arrow.png" alt="arrow">
+                    </div>
+                </div>
+
+                <div class="list-content">
+                    <div class="user-input">
+                        <label for="Avatar">Change Avatar:- </label>
+                        <div id="Avatar">
+                            <button onclick="showAvatarPannel()"> CHANGE </button>
+                        </div>
+                    </div>
+                    <div class="user-input">
+                        <label for="User">Change Username:- </label>
+                        <input type="text" id="User">
+                    </div>
+                    <div class="user-input">
+                        <label for="Email">Update Email:- </label>
+                        <input type="email" id="Email">
+                    </div>
+                    <div class="user-input">
+                        <label for="password">Change Password:- </label>
+                        <input type="text" id="password">
+                    </div>
+                    <div class="user-input">
+                        <label for="confirmPassword">Confirm Password:- </label>
+                        <input type="text" id="confirmPassword">
+                    </div>
+                    <div class="user-input">
+                        <button onclick="updateUserDetails()">Submit</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="action-list">
+                <div class="list-heading">
+                    <h2> History of Orders </h2>
+                    <div class="list-heading-icon" data-state='0deg'>
+                        <img src="../static/Images/userpage/arrow.png" alt="arrow">
+                    </div>
+                </div>
+
+                <div class="list-content">
+                    <!-- <div class="order-skeleton"></div> -->
+                    <!-- <div class="order">
+                        <div class="order-name">
+                            <p onmouseover="showOrderImage(0)" onmouseout="hideOrderImage(0)">Here will come our product's name</p>
+                        </div>
+                        <div class="order-day">
+                            MONDAY
+                        </div>
+                        <div class="order-time">
+                            2018-8-3 11:12:40
+                        </div>
+                        <div class="order-image">
+                            <img src="../static/Images/explore/temp.jpg" alt="Order image">
+                        </div>
+                    </div> -->
+                    
+                </div>
+
+            </div>
+            <div class="action-list">
+                <div class="list-heading">
+                    <h2> Default Shipping Address </h2>
+                    <div class="list-heading-icon" onclick="toggleList(2, 350)" data-state='0deg'>
+                        <img src="../static/Images/userpage/arrow.png" alt="arrow">
+                    </div>
+                </div>
+
+                <div class="list-content">
+                    <div class="user-input">
+                        <label for="address"> Add Address :- </label>
+                        <input id="address" type="text" placeholder="Address not added yet"></input>
+                    </div>
+
+                    <div class="user-input">
+                        <label for="pin-code"> Add Pin code :-  </label>
+                        <input id="pin-code" type="text" placeholder="Pin code not added yet"></input>
+                    </div>
+
+                    <div class="user-input">
+                        <label for="mobileNumber"> Add Mobile number :- </label>
+                        <input id="mobileNumber" type="text" placeholder="Mobile number not added yet"></input>
+                    </div>
+
+                    <div class="user-input">
+                        <button onclick="askForConfirmation()">Submit</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="confirmation-base">
+        <div id="confirmation-container">
+            <div id="confirmation-heading">
+                <img src="../static/Images/userpage/warning.png">
+                <h1> WARNING </h1>
+            </div>
+            <div id="confirmation-message">
+                <h2> Before submitting please make sure that you are not leaving any fields empty, If you do so then it will overwrite in database, as "you haven't updated anything" </h2>
+            </div>
+            <div id="confirmation-options">
+                <button onclick="closeConfirmationWindow('YES')"> YES </button>
+                <button onclick="closeConfirmationWindow('NO')"> NO </button>
+            </div>
+        </div>
+    </div>
+
+    <div id='avatarPannelBase'>
+        <div id="avatarPannel">
+            <div id="avatarPannelPreloader">
+                <img src="../static/Images/account/preLoader.gif" alt="Pre Loader">
+            </div>
+            <div id="avatarHeading">
+                <h2>Avatar Changing Pannel</h2>
+                <button onclick="updateAvatar()" > Update </button>
+                <img src="../static/Images/account/close.png" onclick="closeAvatarPannel()">
+            </div>
+            <div id="avatarsImgContainer">
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="status">
+        <h2 id="statusMessage"></h2>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // Global declarations of varaibles
+        let actionListContainers = document.getElementsByClassName('action-list');
+        let arrowIcons = document.querySelectorAll(".list-heading-icon");
+        let actionLists = document.querySelectorAll('.action-list');
+        let avatar = document.getElementById('avatar');
+        let infoContainers = document.getElementsByClassName('info');
+        let contentLists = document.getElementsByClassName('list-content');
+        let confirmationPannel = document.querySelector('#confirmation-base');
+        let body = document.getElementsByTagName('body');
+        let statusContainer = document.getElementById('status');
+        let avatarImgContainers = document.getElementsByClassName('avtContainer');
+        let avatarPannel = document.getElementById('avatarPannelBase');
+        let avatarContainer = document.getElementById('avatarsImgContainer');
+        let avatarPreloader = document.getElementById('avatarPannelPreloader');
+        let avatarHeading = document.getElementById('avatarHeading');
+
+
+
+        // This function is executed when the page is loaded to set all the fields
+        function setFields(){
+            // Function to fetch avatar from firestore
+            if (sessionStorage.getItem('AvatarURL') === null){
+                fetchImageForAvatar(resp => {
+                    console.log('Here we go with our for fetching avatar => ', resp);
+                    if (resp == '404'){
+                        displayStatus('500', 'Failed to fetch details');
+                        return;
+                    } else {
+                        avatar.children[0].src = resp;
+                    }
+                });
+            } else {
+                avatar.children[0].src = sessionStorage.getItem('AvatarURL');
+            }
+            // Iterating on all account pannel childrens and updating the information
+            Array.from(infoContainers).forEach( container => {
+                let attribute = container.getAttribute('data-type');
+                if (attribute){
+                    if (sessionStorage.getItem(attribute) !== "" && sessionStorage.getItem(attribute)) {
+                        container.children[0].innerHTML = sessionStorage.getItem(attribute);
+                    } else {
+                        container.children[0].innerHTML = 'Not Updated';
+                    }
+                }
+            });
+
+            // Checking if user is have shopped anything yet if no then display the message or else display the list of shopped items
+            if (sessionStorage.getItem('TotalPurchase') && sessionStorage.getItem('TotalPurchase') !== "0"){
+                let totalOrders = parseInt(sessionStorage.getItem('TotalPurchase'));
+                let calcHeight = (totalOrders)*150;
+                arrowIcons[1].setAttribute('onclick', `toggleList(1, ${calcHeight})`);
+                if (sessionStorage.getItem('orders') === null){
+                    for (let i = 0; i < totalOrders; i ++){
+                        contentLists[1].insertAdjacentHTML('beforeend',
+                            `<div class="order">
+                                <div class="order-name"></div>
+                                <div class="order-day"></div>
+                                <div class="order-time"></div>
+                                <div class="order-image"></div>
+                                <div class='order-skeleton'></div>
+                            </div>`
+                    )}
+                    getOrderHistory(sessionStorage.getItem('User'), resp => {
+                        if (resp === '200'){
+                            var orders = JSON.parse(sessionStorage.getItem('orders'));
+                            var orderContainers = document.querySelectorAll('.order');
+                            var i  = 0;
+                            orders.forEach(order => {
+                                orderContainers[i].style.overflow = 'visible';
+                                orderContainers[i].children[1].innerHTML = `<p onmouseover="showOrderImage(0)" onmouseout="hideOrderImage(0)">${order['orderName']}</p>`;
+                                orderContainers[i].children[1].style.background = 'white';
+                                orderContainers[i].children[3].style.background = 'white';
+                                orderContainers[i].children[2].innerHTML = order['orderWeekDay'];
+                                orderContainers[i].children[2].style.background = 'white';
+                                orderContainers[i].children[3].innerHTML = order['orderCurrTime'];
+                                // orderContainers[i].children[4].children[0].src = '../static/Images/explore/temp.jpg';
+                                i++ ;
+                            });
+                        } else {
+                            displayStatus(resp, 'Something went wrong while fetching order details');
+                            arrowIcons[1].setAttribute('onclick', `toggleList(1, '150')`);
+                            contentLists[1].innerHTML = `Something went wrong while fetching order details`;  
+                        }
+                    })
+                } else {
+                    var orders = JSON.parse(sessionStorage.getItem('orders'));
+                    for (let i = 0; i < totalOrders; i ++){
+                        contentLists[1].insertAdjacentHTML('beforeend',
+                            `<div class="order" style="overflow: visible">
+                                <div class="order-name">
+                                    <p onmouseover="showOrderImage(${i})" onmouseout="hideOrderImage(${i})">${orders[i]['orderName']}</p>
+                                </div>
+                                <div class="order-day">
+                                    ${orders[i]['orderWeekDay']}    
+                                </div>
+                                <div class="order-time">
+                                    ${orders[i]['orderCurrTime']}    
+                                </div>
+                                <div class="order-image">
+                                    <img src="../static/Images/explore/temp.jpg" alt="Order image">
+                                </div>
+                            </div>`
+                    )};
+                }
+            }
+            else {
+                arrowIcons[1].setAttribute('onclick', `toggleList(1, '120')`);
+                contentLists[1].innerHTML = `You haven't purchased anything yet!`;
+            }
+
+            // Checking if the user have entered the adderess and saved in database 
+            // If yes then display that address or else display nothing
+            if (sessionStorage.getItem('Address') != ""){
+                contentLists[2].children[0].children[1].value = sessionStorage.getItem('Address');
+            }
+            if (sessionStorage.getItem('PinCode') != ""){
+                contentLists[2].children[1].children[1].value = sessionStorage.getItem('PinCode');
+            }
+            if (sessionStorage.getItem('MobileNumber') != ""){
+                contentLists[2].children[2].children[1].value = sessionStorage.getItem('MobileNumber');
+            }
+
+
+
+            // Iterating on all the "update user details" field to update the placeholders with their values
+            Array.from(contentLists[0].children).forEach(child => {
+                if (child.children[1].id === 'User' || child.children[1].id === 'Email'){
+                    child.children[1].placeholder = sessionStorage.getItem(child.children[1].id);
+                }
+            })
+        }
+
+        // Function to toggle list
+        function toggleList(idx, heightVal){
+            let arrow = arrowIcons[idx];
+            let list = actionLists[idx];
+
+
+            // Rotating arrow icon to 180deg on click
+            var arrowState = arrow.getAttribute('data-state');
+            var heightState = window.getComputedStyle(list).getPropertyValue('height');
+            arrow.style.transform = arrowState === '0deg' ? 'rotateZ(180deg)' : 'rotateZ(0deg)';
+            arrow.setAttribute('data-state' ,arrowState === '0deg' ? '180deg' : '0deg');
+            // Expanding the content section on click
+            list.style.height = (heightState === '60px') ? `${heightVal}px` : '60px';
+        } 
+
+        // Function to make confirmation window visible 
+        function askForConfirmation(){
+            confirmationPannel.style.animation = `popup .3s linear `;
+            confirmationPannel.style.animationFillMode = 'forwards';
+        }        
+
+        // Function to close the confirmation window based on user input which is YES/NO
+        function closeConfirmationWindow(message){
+            if (message === 'YES'){
+                updateAddress(resp => {
+                    displayStatus('200', resp);
+                });
+                confirmationPannel.style.animation = 'hidedown .3s linear';
+
+                // After updating closing down the warning window
+                // confirmationPannel.style.animation = 'hidedown .3s linear';
+                // setTimeout(() => {
+                //     location.reload();
+                // }, 1500)
+            } else {
+                // Closing down the warning window because user selected NO option
+                confirmationPannel.style.animation = 'hidedown .3s linear';
+            }
+        }
+
+        function displayStatus(status, message){
+            statusContainer.style.transform = 'translateY(0%)';
+            console.log('Displaying ', message);
+            if (status === '500'){
+                statusContainer.style.background = 'rgba(255, 0, 0, .6)';
+                statusContainer.style.border = '1px solid red';
+                statusContainer.children[0].innerHTML = message;
+            } else {
+                statusContainer.style.background = 'rgba(0, 255, 0, .6)';
+                statusContainer.style.border = '1px solid green';
+                statusContainer.children[0].innerHTML = message;
+
+            }
+            setTimeout(() => {
+                statusContainer.style.transform = 'translateY(-120%)';
+            }, 5000)
+            
+        }
+
+        // Function to show avatar pannel for changing it 
+        function showAvatarPannel(){
+            // Enabling the avatar selection pannel 
+            avatarPannel.style.display = 'block';
+            
+            getAllAvatars(resp => {
+                avatarPreloader.style.display = 'none';
+                console.log(resp);
+                let i = 1;
+                while (i <= 15){
+                    try {
+                        resp[`Avatars/Avatar ${i}.png`][1];
+                        var extension = 'png';
+                    } catch(err){
+                        console.log('We have encountered an error, Possibly it might be Type Error', err)
+                        var extension = 'gif';
+                    }
+                    avatarContainer.insertAdjacentHTML('afterbegin',
+                    `
+                    <input onclick="saveAvatar('${`Avatars/Avatar ${i}.${extension}`}',
+                     '${resp[`Avatars/Avatar ${i}.${extension}`][1]}')"
+                    style="background-image: url(${resp[`Avatars/Avatar ${i}.${extension}`][1]});">
+                    `)
+                    i += 1;
+                }
+            })
+        }
+       
+        // Function to close the avatar pannel on click of cross mark present on top right
+        // of pannel
+        function closeAvatarPannel(){
+            // Hiding the avatar selection pannel 
+            avatarPannel.style.display = 'none';
+        }
+
+        function highlightAvatar(idx){
+            console.log(avatarImgContainers[idx]);
+            avatarImgContainers[idx].style.border = '1px solid black';
+        }
+
+        // Function to grab avatar which we have to update and save in variable
+        function saveAvatar(name, link){
+            avatarHeading.children[1].setAttribute('onclick',`updateAvatar('${name}', '${link}')`);
+        }
+
+        function showOrderImage(idx){
+            let orderImageContainer = document.getElementsByClassName('order-image');
+            orderImageContainer[idx].style.visibility = 'visible';
+            orderImageContainer[idx].style.opacity = '1';
+        }
+
+        function hideOrderImage(idx){
+            let orderImageContainer = document.getElementsByClassName('order-image');
+            orderImageContainer[idx].style.visibility = 'hidden';
+            orderImageContainer[idx].style.opacity = '0';
+        }
+
+        function logout(){
+            sessionStorage.clear();
+            location.href = '../index.html';
+        }
+
+    </script>
+
+
+
+    <script src="../scripts/firestoreConfig.js"></script>
+    <script src="../scripts/firestore.js"></script>
+    <script src="../scripts/userDetails.js"></script>
+</body>
+</html>
+
+
+<!-- Features for userpage -->
+
+<!-- 
+1) Change avatar
+2) Change username
+3) Update email
+4) change password
+5) Confirm password
+6) Submit button
+
+
+-> orders list
+
+
+- Shipping address
+    -> Address 
+    -> Pincode
+    -> Mobile number
+
+ -->
+

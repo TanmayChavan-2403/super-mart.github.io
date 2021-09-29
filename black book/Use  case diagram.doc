@@ -1,0 +1,12 @@
+User -> log in
+User -> Registration
+User -> View products
+User -> Buy / Book product
+User -> Check order history
+User -> Update credentials
+ 
+
+Owner -> Log in
+Owner -> View products
+Owner -> Add or remove product
+Owner -> Can Transaction history
