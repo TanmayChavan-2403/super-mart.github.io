@@ -45,7 +45,7 @@ img{
     width: 2.5%;
     height: 100%;
     background: black;
-    transition: .8s;
+    transition: .5s;
     position: relative;
 }
 
@@ -53,7 +53,7 @@ img{
     width: 15%;
     height: 100%;
     background: black;
-    transition: .8s;
+    transition: .5s;
 }
 
 #toggle-box{
@@ -63,7 +63,7 @@ img{
     justify-content: space-around;
     flex-wrap: wrap;
     position: relative;
-    transition: .8s;
+    transition: .5s;
     cursor: pointer;
 }
 
@@ -72,7 +72,7 @@ img{
     height: 45%;
     border: 1px solid black;
     border-radius: 3px;
-    transition: 1.8s;
+    transition: .6s;
     text-align: center;
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;

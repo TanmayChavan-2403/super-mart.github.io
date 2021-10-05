@@ -24,5 +24,3 @@ function login(username, password, callbackResp){
 
 // indexedDB documentation
 // https://javascript.info/indexeddb
-
-
