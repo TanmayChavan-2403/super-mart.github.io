@@ -509,8 +509,9 @@ img{
     height: fit-content;
     border: 1px solid black;
     /*background: rgba(255, 0, 0, .6);*/
-    background: black;
+    background: transparent;
     position: absolute;
+    padding: 10px;
     top: 10px;
     right: 40px;
     border-radius: 15px;
@@ -521,7 +522,7 @@ img{
     font-size: 1em;
     color: white;
     transition: .5s;
-    transform: translateY(-120%);
+    transform: translateY(-150%);
 }
 
 

@@ -281,7 +281,7 @@
             // Checking if user is have shopped anything yet if no then display the message or else display the list of shopped items
             if (sessionStorage.getItem('TotalPurchase') && sessionStorage.getItem('TotalPurchase') !== "0"){
                 let totalOrders = parseInt(sessionStorage.getItem('TotalPurchase'));
-                let calcHeight = (totalOrders)*150;
+                let calcHeight = (totalOrders)*100;
                 arrowIcons[1].setAttribute('onclick', `toggleList(1, ${calcHeight})`);
                 if (sessionStorage.getItem('orders') === null){
                     for (let i = 0; i < totalOrders; i ++){
@@ -318,7 +318,9 @@
                     })
                 } else {
                     var orders = JSON.parse(sessionStorage.getItem('orders'));
+                    console.log(orders);
                     for (let i = 0; i < totalOrders; i ++){
+                        console.log(i);
                         contentLists[1].insertAdjacentHTML('beforeend',
                             `<div class="order" style="overflow: visible">
                                 <div class="order-name">
@@ -344,13 +346,14 @@
 
             // Checking if the user have entered the adderess and saved in database 
             // If yes then display that address or else display nothing
-            if (sessionStorage.getItem('Address') != ""){
+            if (sessionStorage.getItem('Address') !== ""){
+                console.log('Its reaching here, in address section');
                 contentLists[2].children[0].children[1].value = sessionStorage.getItem('Address');
             }
-            if (sessionStorage.getItem('PinCode') != ""){
+            if (sessionStorage.getItem('PinCode') !== ""){
                 contentLists[2].children[1].children[1].value = sessionStorage.getItem('PinCode');
             }
-            if (sessionStorage.getItem('MobileNumber') != ""){
+            if (sessionStorage.getItem('MobileNumber') !== ""){
                 contentLists[2].children[2].children[1].value = sessionStorage.getItem('MobileNumber');
             }
 
@@ -408,13 +411,15 @@
             statusContainer.style.transform = 'translateY(0%)';
             console.log('Displaying ', message);
             if (status === '500'){
-                statusContainer.style.background = 'rgba(255, 0, 0, .6)';
-                statusContainer.style.border = '1px solid red';
+                statusContainer.style.background = 'rgb(212, 140, 140)';
+                statusContainer.style.border = '1px solid rgb(187, 38, 38)';
                 statusContainer.children[0].innerHTML = message;
+                statusContainer.style.color = 'rgb(187, 38, 38)'
             } else {
-                statusContainer.style.background = 'rgba(0, 255, 0, .6)';
-                statusContainer.style.border = '1px solid green';
+                statusContainer.style.background = '#d5ecd8';
+                statusContainer.style.border = '1px solid #74947b';
                 statusContainer.children[0].innerHTML = message;
+                statusContainer.style.color = '#74947b'
 
             }
             setTimeout(() => {

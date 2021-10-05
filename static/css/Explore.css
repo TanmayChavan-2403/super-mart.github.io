@@ -54,10 +54,10 @@ img{
 }
 
 #back-button{
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    background: #3f4462;
+    /* background: #3f4462; */
     cursor: pointer;
 }
 
@@ -643,7 +643,7 @@ img{
 
 #InfoImgContainer{
     width: 40%;
-    height: 100%;
+    height: fit-content;
     background:rgb(4, 36, 47);
 }
 
@@ -698,7 +698,7 @@ img{
 }
 
 #purchaseImage-container img{
-    object-fit: contain;
+    object-fit: cover;
 }
 
 #purchaseMessage-container{

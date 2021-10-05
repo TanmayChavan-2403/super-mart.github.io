@@ -334,8 +334,11 @@
         function purchase(path, name, type, price, collection){
             // Enabling the status board 
             document.getElementById('purchaseBase-container').style.display = 'flex';
-            
-            const productURL = JSON.parse(sessionStorage.getItem(collection))[path];
+            try{
+                const productURL = JSON.parse(sessionStorage.getItem(collection))[path];
+            } catch(err){
+                location.reload();
+            }
             if (sessionStorage.getItem('User') === null){
                 document.getElementById('purchase-container').style.display = 'flex';
                 updateDetails("../static/Images/purchase/login message.gif", "Not LoggedIn", 'Please login/ register to book or buy any product');
@@ -369,7 +372,7 @@
                     }
                 } else {
                     // Else we have to ask user to book that product and go to pick up that product by himself
-                    updateDetails("../static/Images/purchase/apologize.png", "Failed! Reason ", 'Sorry, currently our service is not available in your area, we are planning to expand our service and will be available in your area very soon. Would you like to book our product instead? Click on Book button for more details');
+                    updateDetails("../static/Images/purchase/apologize.png", "Failed! ", 'Sorry, currently our service is not available in your area, we are planning to expand our service and will be available in your area very soon. Would you like to book our product instead? Click on Book button for more details');
                 } 
             } else {
                 // If user haven't added pincode then update the text heading and image
@@ -423,7 +426,9 @@
             document.getElementById('purchaseImage-container').children[0].src = imgPath; // updaing the image showing cross hands as not allowed
             document.getElementById('purchaseMessageTitle-container').children[0].innerHTML = heading; // Setting text of heading as warning 
             document.getElementById('purchaseMessage-container').children[1].innerHTML = message;
-
+            if (heading === 'Booked'){
+                document.getElementById('purchaseMessageTitle-container').children[0].style.color = 'green';
+            }
         }
 
         // This funtion is used to store and navigate throught the explore webpage

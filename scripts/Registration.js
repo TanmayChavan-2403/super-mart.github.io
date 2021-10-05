@@ -78,7 +78,7 @@ async function register(username, password, email){
     console.log('HEHE' + username);
     let resp = await valid(username, password, email, 'register');
     if (resp[0] === 'Success'){
-        console.log('Successfully Regestired');
+        console.log('Successfully Registered');
         firebase.database().ref(`Users/${username}`).set({
             username: username,
             email: email,
